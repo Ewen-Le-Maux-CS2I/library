@@ -1,4 +1,9 @@
+package com.library.factory;
+import com.library.model.*;
+import org.springframework.stereotype.Service;
+
 import java.Interfaces.UsineAbstraite;
+
 
 private class UsineOuvrage implements UsineAbstraite {
     @Override
