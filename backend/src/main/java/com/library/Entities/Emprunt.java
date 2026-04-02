@@ -1,7 +1,7 @@
 package com.library.model;
 
-import com.library.state.EtatEmprunt;
-import com.library.state.EnCours;
+import com.library.State.EtatEmprunt;
+import com.library.State.EnCours;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;

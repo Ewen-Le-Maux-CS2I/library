@@ -1,6 +1,6 @@
 import jakarta.validation.Valid;
-import jakarta.persistence.Entity;
-import java.entities.ouvrage.Ouvrage;
+import jakarta.persistence.*;
+import java.com.library.Entities.Ouvrage;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)

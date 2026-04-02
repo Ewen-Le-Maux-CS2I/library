@@ -1,6 +1,6 @@
 package com.library.state;
 
-import com.library.model.Emprunt;
+import com.library.com.Entities.Emprunt;
 
 public class EnCours implements EtatEmprunt {
     @Override

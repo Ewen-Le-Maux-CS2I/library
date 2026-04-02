@@ -1,3 +1,6 @@
+package com.library.Entities;
+import jakarta.persistence.*;
+
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 public abstract class Ouvrage implements Produit {

@@ -1,14 +1,13 @@
-import javakarta.validation.Valid;
 import jakarta.persistence.Entity;
-import java.entities.ouvrage.Ouvrage;
+import com.library.Entities.Ouvrage;
 
 @Entity
-private class Livre extends Ouvrage {
-    @Valid
+public class Livre extends Ouvrage {
+    @NotNull
     private String auteur;
-    @Valid
+    @NotNull
     private Long isbn;
-    @Valid
+    @NotNull
     private int datePublication;
 
     // Getters et setters

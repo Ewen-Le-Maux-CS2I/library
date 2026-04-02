@@ -1,11 +1,11 @@
 package com.library.factory;
-import com.library.model.*;
+import com.library.Entities.*;
 import org.springframework.stereotype.Service;
 
-import java.Interfaces.UsineAbstraite;
+import java.com.library.Interfaces.UsineAbstraite;
 
 
-private class UsineOuvrage implements UsineAbstraite {
+public class UsineOuvrage implements UsineAbstraite {
     @Override
     public Produit creerProduit() {
         return new Ouvrage();
