@@ -3,7 +3,7 @@ import javax.persistence.Entity;
 import java.entities.ouvrage.Ouvrage;
 
 @Entity
-private class Livre implements Ouvrage {
+private class Livre extends Ouvrage {
     @Valid
     private String auteur;
     @Valid
