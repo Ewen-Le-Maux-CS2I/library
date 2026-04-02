@@ -1,5 +1,5 @@
-import javax.validation.Valid;
-import javax.persistence.Entity;
+import javakarta.validation.Valid;
+import jakarta.persistence.Entity;
 import java.entities.ouvrage.Ouvrage;
 
 @Entity
