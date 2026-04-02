@@ -1,13 +1,14 @@
 import javax.validation.Valid;
-import 
+import javax.persistence.Entity;
+import java.entities.ouvrage.Ouvrage;
 
+@Entity
 private class Livre implements Ouvrage {
-    private Long id;
-    @Valid
-    private String titre;
     @Valid
     private String auteur;
+    @Valid
     private Long isbn;
+    @Valid
     private int datePublication;
 
     // Getters et setters
