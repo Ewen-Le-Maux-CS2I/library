@@ -23,8 +23,8 @@ jobs:
           distribution: 'temurin'
           cache: 'maven'
 
-      - name: Run Linter (Checkstyle)
-        run: mvn checkstyle:check
+      - name: Run Linter (Spotless Modern Formatter)
+        run: mvn spotless:check
 
       - name: Build and Run Tests (TDD)
         run: mvn clean verify
