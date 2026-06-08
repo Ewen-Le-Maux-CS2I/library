@@ -1,7 +1,10 @@
 package com.library.entities;
 
-import com.library.state.EnCours;
 import com.library.state.EtatEmprunt;
+import com.library.state.Rendu;
+import com.library.state.Perdu;
+import com.library.state.EnRetard;
+import com.library.state.EnCours;
 import jakarta.persistence.*;
 import java.time.LocalDate;
 
