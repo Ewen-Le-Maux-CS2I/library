@@ -1,13 +1,13 @@
 2X4xNOEA2OB4Wp4nPLLpEETqcDuw2rVxWJnG2dWtZMk=
 src\main\java\com\library\controller\EmpruntController.java 2026-06-08T10:02:36.303387Z
 src\main\java\com\library\controller\LivreController.java 2026-06-08T10:02:36.352037Z
-src\main\java\com\library\entities\Emprunt.java 2026-06-08T10:02:36.416681600Z
+src\main\java\com\library\entities\Emprunt.java 2026-06-08T13:19:08.296651700Z
 src\main\java\com\library\entities\Exemplaire.java 2026-06-08T10:02:36.452322700Z
 src\main\java\com\library\entities\Livre.java 2026-06-08T10:02:36.462952900Z
 src\main\java\com\library\entities\Ouvrage.java 2026-06-08T10:02:36.495856600Z
 src\main\java\com\library\entities\Revue.java 2026-06-08T10:02:36.527032Z
 src\main\java\com\library\factory\UsineAbstraite.java 2026-06-08T10:02:36.544067500Z
-src\main\java\com\library\factory\UsineOuvrage.java 2026-06-08T10:02:36.588784Z
+src\main\java\com\library\factory\UsineOuvrage.java 2026-06-08T13:19:08.340127Z
 src\main\java\com\library\LibraryApplication.java 2026-06-08T10:02:36.621686800Z
 src\main\java\com\library\repository\EmpruntRepository.java 2026-06-08T10:02:36.636620800Z
 src\main\java\com\library\repository\ExemplaireRepository.java 2026-06-08T10:02:36.654682800Z

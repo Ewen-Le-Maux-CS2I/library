@@ -68,18 +68,16 @@ public class Emprunt {
     this.nomEtat = nouvelEtat.getNom();
   }
 
-
   @PostLoad
   @PostPersist
   public void initEtat() {
     switch (nomEtat == null ? "En cours" : nomEtat) {
-      case "Rendu"     -> this.etatActuel = new Rendu();
-      case "Perdu"     -> this.etatActuel = new Perdu();
+      case "Rendu" -> this.etatActuel = new Rendu();
+      case "Perdu" -> this.etatActuel = new Perdu();
       case "En retard" -> this.etatActuel = new EnRetard();
-      default          -> this.etatActuel = new EnCours();
+      default -> this.etatActuel = new EnCours();
     }
   }
-
 
   public void retourner() {
     if (etatActuel == null) etatActuel = new EnCours();

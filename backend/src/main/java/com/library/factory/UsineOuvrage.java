@@ -9,7 +9,6 @@ import org.springframework.stereotype.Component;
 public class UsineOuvrage extends UsineAbstraite {
 
   /**
-   *
    * @param titre titre de l'ouvrage
    * @param genre genre littéraire
    * @param auteur nom de l'auteur
