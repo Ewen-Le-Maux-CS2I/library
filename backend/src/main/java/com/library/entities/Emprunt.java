@@ -68,17 +68,18 @@ public class Emprunt {
     this.nomEtat = nouvelEtat.getNom();
   }
 
-  // ── Initialisation de l'état transient après chargement JPA ─────────────
 
   @PostLoad
   @PostPersist
   public void initEtat() {
-    if (etatActuel == null) {
-      etatActuel = new EnCours();
+    switch (nomEtat == null ? "En cours" : nomEtat) {
+      case "Rendu"     -> this.etatActuel = new Rendu();
+      case "Perdu"     -> this.etatActuel = new Perdu();
+      case "En retard" -> this.etatActuel = new EnRetard();
+      default          -> this.etatActuel = new EnCours();
     }
   }
 
-  // ── Méthodes métier (délégation au State pattern) ────────────────────────
 
   public void retourner() {
     if (etatActuel == null) etatActuel = new EnCours();
