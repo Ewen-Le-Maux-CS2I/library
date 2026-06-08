@@ -1,0 +1,43 @@
+version: '3.8'
+
+services:
+  # --- BASE DE DONNÉES MARIADB ---
+  database:
+    image: mariadb:11.2
+    container_name: library-db
+    restart: always
+    environment:
+      MARIADB_ROOT_PASSWORD: root_password
+      MARIADB_DATABASE: library_db
+      MARIADB_USER: library_user
+      MARIADB_PASSWORD: library_password
+    ports:
+      - "3306:3306"
+    volumes:
+      - mariadb_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  # --- APPLICATION SPRING BOOT (BACKEND) ---
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: library-backend
+    restart: always
+    ports:
+      - "8080:8080"
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mariadb://database:3306/library_db?createDatabaseIfNotExist=true
+      - SPRING_DATASOURCE_USERNAME=library_user
+      - SPRING_DATASOURCE_PASSWORD=library_password
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+    depends_on:
+      database:
+        condition: service_healthy
+
+volumes:
+  mariadb_data:

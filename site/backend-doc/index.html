@@ -1,0 +1,1475 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="A new project generated from the default template project.">
+      
+      
+        <meta name="author" content="<your name here>">
+      
+      
+        <link rel="canonical" href="https://ewen-le-maux-cs2i.github.io/library/backend-doc/">
+      
+      
+      
+        <link rel="next" href="../Test/Backend/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="zensical-0.0.40">
+    
+    
+      
+        <title>Backend - Documentation</title>
+      
+    
+    
+      
+        
+      
+      <link rel="stylesheet" href="../assets/stylesheets/modern/main.fba56155.min.css">
+      
+        
+          
+        
+        <link rel="stylesheet" href="../assets/stylesheets/modern/palette.dfe2e883.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,300i,400,400i,500,500i,700,700i%7CJetBrains+Mono:400,400i,700,700i&amp;display=fallback">
+        <style>:root{--md-text-font:"Inter";--md-code-font:"JetBrains Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_scope.pathname.endsWith("/")||(__md_scope=new URL(__md_scope.pathname+"/",location)),__md_hash=e=>[...e].reduce(((e,t)=>(e<<5)-e+t.charCodeAt(0)),0),__md_get=(e,t=localStorage,_=__md_scope)=>JSON.parse(t.getItem(_.pathname+"."+e)),__md_set=(e,t,_=localStorage,a=__md_scope)=>{try{_.setItem(a.pathname+"."+e,JSON.stringify(t))}catch(e){}},document.documentElement.setAttribute("data-platform",navigator.platform)</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer" aria-label="Navigation"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#backend" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="./.." title="Documentation" class="md-header__button md-logo" aria-label="Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-book-open" viewBox="0 0 24 24"><path d="M12 7v14M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer" aria-label="Navigation">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-menu" viewBox="0 0 24 24"><path d="M4 5h16M4 12h16M4 19h16"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Documentation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Backend
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="none" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="none" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-moon" viewBox="0 0 24 24"><path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search" aria-label="Search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-search" viewBox="0 0 24 24"><path d="m21 21-4.34-4.34"/><circle cx="11" cy="11" r="8"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog" aria-label="Search">
+  <button type="button" class="md-search__button">
+    Search
+  </button>
+</div>
+      
+    
+    <div class="md-header__source">
+      
+    </div>
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="./.." title="Documentation" class="md-nav__button md-logo" aria-label="Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-book-open" viewBox="0 0 24 24"><path d="M12 7v14M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/></svg>
+
+    </a>
+    Documentation
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Backend
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="././" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Backend
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+
+<nav class="md-nav md-nav--secondary" aria-label="On this page">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      On this page
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#vue-densemble" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Vue d'ensemble
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Architecture
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#modele-de-donnees" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Modèle de données
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Modèle de données">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#hierarchie-des-ouvrages" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Hiérarchie des ouvrages
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exemplaire" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Exemplaire
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#emprunt" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Emprunt
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#design-patterns" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Design patterns
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Design patterns">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#abstract-factory" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Abstract Factory
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#state-machine-detats-dun-emprunt" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        State – Machine d'états d'un Emprunt
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#api-rest" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        API REST
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="API REST">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#livres-apilivres" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Livres – <code>/api/livres</code>
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Livres – &#x2f;api&#x2f;livres">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#get-apilivres" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        <code>GET /api/livres</code>
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-apilivresid" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        <code>GET /api/livres/{id}</code>
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#post-apilivres" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        <code>POST /api/livres</code>
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#delete-apilivresid" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        <code>DELETE /api/livres/{id}</code>
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#emprunts-apiemprunts" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Emprunts – <code>/api/emprunts</code>
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Emprunts – &#x2f;api&#x2f;emprunts">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#post-apiemprunts" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        <code>POST /api/emprunts</code>
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#patch-apiempruntsidretourner" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        <code>PATCH /api/emprunts/{id}/retourner</code>
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#patch-apiempruntsidperte" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        <code>PATCH /api/emprunts/{id}/perte</code>
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ce-qui-manque-a-implementer" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Ce qui manque (à implémenter)
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Ce qui manque (à implémenter)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fonctionnalites-non-couvertes" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Fonctionnalités non couvertes
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Configuration
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Test
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+  Test
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Test/Backend/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Backend
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Test/Front/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Front
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Test/Git/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Git
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  
+                    
+                    
+                    
+                      
+                    
+                    
+                      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+                      <div class="md-sidebar-button__wrapper">
+                        <label class="md-sidebar-button" for="__toc"></label>
+                      </div>
+                    
+                  
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--secondary" aria-label="On this page">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      On this page
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#vue-densemble" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Vue d'ensemble
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Architecture
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#modele-de-donnees" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Modèle de données
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Modèle de données">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#hierarchie-des-ouvrages" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Hiérarchie des ouvrages
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exemplaire" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Exemplaire
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#emprunt" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Emprunt
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#design-patterns" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Design patterns
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Design patterns">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#abstract-factory" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Abstract Factory
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#state-machine-detats-dun-emprunt" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        State – Machine d'états d'un Emprunt
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#api-rest" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        API REST
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="API REST">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#livres-apilivres" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Livres – <code>/api/livres</code>
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Livres – &#x2f;api&#x2f;livres">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#get-apilivres" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        <code>GET /api/livres</code>
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-apilivresid" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        <code>GET /api/livres/{id}</code>
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#post-apilivres" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        <code>POST /api/livres</code>
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#delete-apilivresid" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        <code>DELETE /api/livres/{id}</code>
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#emprunts-apiemprunts" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Emprunts – <code>/api/emprunts</code>
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Emprunts – &#x2f;api&#x2f;emprunts">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#post-apiemprunts" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        <code>POST /api/emprunts</code>
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#patch-apiempruntsidretourner" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        <code>PATCH /api/emprunts/{id}/retourner</code>
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#patch-apiempruntsidperte" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        <code>PATCH /api/emprunts/{id}/perte</code>
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ce-qui-manque-a-implementer" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Ce qui manque (à implémenter)
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Ce qui manque (à implémenter)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fonctionnalites-non-couvertes" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Fonctionnalités non couvertes
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Configuration
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+                
+
+
+
+
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+<h1 id="backend">Backend<a class="headerlink" href="#backend" title="Permanent link">&para;</a></h1>
+<h2 id="vue-densemble">Vue d'ensemble<a class="headerlink" href="#vue-densemble" title="Permanent link">&para;</a></h2>
+<p>Backend Spring Boot pour la gestion d'une bibliothèque. Il expose une API REST et applique deux design patterns : <strong>Abstract Factory</strong> pour la création des ouvrages, et <strong>State</strong> pour le cycle de vie des emprunts.</p>
+<p><strong>Stack technique</strong>
+- Java 21
+- Spring Boot 3.3
+- Spring Data JPA + H2 (base en mémoire)
+- Spring MVC (API REST)
+- JUnit 5 (TDD)</p>
+<hr />
+<h2 id="architecture">Architecture<a class="headerlink" href="#architecture" title="Permanent link">&para;</a></h2>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>com.library
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>├── LibraryApplication.java       ← Point d&#39;entrée Spring Boot
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>├── controller/
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>│   ├── LivreController.java      ← REST /api/livres
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>│   └── EmpruntController.java    ← REST /api/emprunts
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>├── service/
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>│   └── Bibliotheque.java         ← Logique métier
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>├── entities/
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>│   ├── Ouvrage.java              ← Classe abstraite (racine JPA)
+</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>│   ├── Livre.java                ← Sous-type d&#39;Ouvrage
+</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>│   ├── Revue.java                ← Sous-type d&#39;Ouvrage
+</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>│   ├── Exemplaire.java           ← Exemplaire physique d&#39;un ouvrage
+</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>│   └── Emprunt.java              ← Emprunt avec machine d&#39;états
+</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>├── factory/
+</span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>│   ├── UsineAbstraite.java       ← Abstract Factory (contrat)
+</span><span id="__span-0-16"><a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>│   └── UsineOuvrage.java         ← Implémentation concrète
+</span><span id="__span-0-17"><a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>├── state/
+</span><span id="__span-0-18"><a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a>│   ├── EtatEmprunt.java          ← Interface State
+</span><span id="__span-0-19"><a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a>│   ├── EnCours.java
+</span><span id="__span-0-20"><a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a>│   ├── EnRetard.java
+</span><span id="__span-0-21"><a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a>│   ├── Rendu.java
+</span><span id="__span-0-22"><a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a>│   └── Perdu.java
+</span><span id="__span-0-23"><a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a>└── repository/
+</span><span id="__span-0-24"><a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a>    ├── OuvrageRepository.java
+</span><span id="__span-0-25"><a id="__codelineno-0-25" name="__codelineno-0-25" href="#__codelineno-0-25"></a>    ├── ExemplaireRepository.java
+</span><span id="__span-0-26"><a id="__codelineno-0-26" name="__codelineno-0-26" href="#__codelineno-0-26"></a>    └── EmpruntRepository.java
+</span></code></pre></div>
+<hr />
+<h2 id="modele-de-donnees">Modèle de données<a class="headerlink" href="#modele-de-donnees" title="Permanent link">&para;</a></h2>
+<h3 id="hierarchie-des-ouvrages">Hiérarchie des ouvrages<a class="headerlink" href="#hierarchie-des-ouvrages" title="Permanent link">&para;</a></h3>
+<p><code>Ouvrage</code> est la classe abstraite</p>
+<table>
+<thead>
+<tr>
+<th>Champ</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>id</code></td>
+<td><code>Long</code></td>
+<td>Identifiant auto-généré</td>
+</tr>
+<tr>
+<td><code>titre</code></td>
+<td><code>String</code></td>
+<td>Titre de l'ouvrage</td>
+</tr>
+<tr>
+<td><code>genre</code></td>
+<td><code>String</code></td>
+<td>Genre littéraire</td>
+</tr>
+<tr>
+<td><code>caution</code></td>
+<td><code>Integer</code></td>
+<td>Montant de la caution</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Livre</strong> étend <code>Ouvrage</code> et ajoute :</p>
+<table>
+<thead>
+<tr>
+<th>Champ</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>auteur</code></td>
+<td><code>String</code></td>
+</tr>
+<tr>
+<td><code>isbn</code></td>
+<td><code>Long</code></td>
+</tr>
+<tr>
+<td><code>datePublication</code></td>
+<td><code>Integer</code></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Revue</strong> étend <code>Ouvrage</code> et ajoute :</p>
+<table>
+<thead>
+<tr>
+<th>Champ</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>numero</code></td>
+<td><code>String</code></td>
+</tr>
+<tr>
+<td><code>dateParution</code></td>
+<td><code>LocalDate</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="exemplaire">Exemplaire<a class="headerlink" href="#exemplaire" title="Permanent link">&para;</a></h3>
+<p>Représente un exemplaire physique d'un ouvrage en rayon.</p>
+<table>
+<thead>
+<tr>
+<th>Champ</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>id</code></td>
+<td><code>Long</code></td>
+<td>Identifiant auto-généré</td>
+</tr>
+<tr>
+<td><code>cote</code></td>
+<td><code>String</code></td>
+<td>Cote de classement</td>
+</tr>
+<tr>
+<td><code>disponible</code></td>
+<td><code>boolean</code></td>
+<td><code>true</code> si empruntable</td>
+</tr>
+<tr>
+<td><code>ouvrage</code></td>
+<td><code>Ouvrage</code></td>
+<td>Référence à l'ouvrage (ManyToOne)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="emprunt">Emprunt<a class="headerlink" href="#emprunt" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Champ</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>id</code></td>
+<td><code>Long</code></td>
+<td>Identifiant auto-généré</td>
+</tr>
+<tr>
+<td><code>dateEmprunt</code></td>
+<td><code>LocalDate</code></td>
+<td>Date de création (défaut : aujourd'hui)</td>
+</tr>
+<tr>
+<td><code>dateRetourPrevue</code></td>
+<td><code>LocalDate</code></td>
+<td>Date de retour prévue</td>
+</tr>
+<tr>
+<td><code>exemplaire</code></td>
+<td><code>Exemplaire</code></td>
+<td>Exemplaire emprunté (ManyToOne)</td>
+</tr>
+<tr>
+<td><code>nomEtat</code></td>
+<td><code>String</code></td>
+<td>État courant persisté (<code>"En cours"</code> par défaut)</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>L'état courant (<code>etatActuel</code>) est <code>@Transient</code> : il n'est pas persisté, mais reconstruit à chaque chargement JPA via <code>@PostLoad</code>.</p>
+</blockquote>
+<hr />
+<h2 id="design-patterns">Design patterns<a class="headerlink" href="#design-patterns" title="Permanent link">&para;</a></h2>
+<h3 id="abstract-factory">Abstract Factory<a class="headerlink" href="#abstract-factory" title="Permanent link">&para;</a></h3>
+<p><code>UsineAbstraite</code> définit le contrat de création. <code>UsineOuvrage</code> est l'implémentation concrète enregistrée comme bean Spring (<code>@Component</code>).</p>
+<div class="language-java highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1">// Créer un livre</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="n">Ouvrage</span><span class="w"> </span><span class="n">livre</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">usineOuvrage</span><span class="p">.</span><span class="na">creerOuvrage</span><span class="p">(</span><span class="s">&quot;Dune&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Science-Fiction&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Frank Herbert&quot;</span><span class="p">);</span>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="c1">// Créer un exemplaire</span>
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="n">Exemplaire</span><span class="w"> </span><span class="n">ex</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">usineOuvrage</span><span class="p">.</span><span class="na">creerExemplaire</span><span class="p">(</span><span class="n">livre</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;SF-001&quot;</span><span class="p">);</span>
+</span></code></pre></div>
+<p><strong>Ce qui manque / à implémenter si besoin :</strong> une <code>UsineRevue</code> pour créer des <code>Revue</code> via la même interface.</p>
+<h3 id="state-machine-detats-dun-emprunt">State – Machine d'états d'un Emprunt<a class="headerlink" href="#state-machine-detats-dun-emprunt" title="Permanent link">&para;</a></h3>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>         signalerRetard()
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>EnCours ─────────────────► EnRetard
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>   │                           │
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>   │ retourner()               │ retourner()
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>   ▼                           ▼
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>Rendu ◄─────────────────── Rendu
+</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>
+</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>EnCours ──declarerPerte()──► Perdu
+</span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>EnRetard ─declarerPerte()──► Perdu
+</span></code></pre></div>
+<p>Transitions autorisées :</p>
+<table>
+<thead>
+<tr>
+<th>État initial</th>
+<th>Action</th>
+<th>État final</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>EnCours</code></td>
+<td><code>retourner()</code></td>
+<td><code>Rendu</code></td>
+</tr>
+<tr>
+<td><code>EnCours</code></td>
+<td><code>signalerRetard()</code></td>
+<td><code>EnRetard</code></td>
+</tr>
+<tr>
+<td><code>EnCours</code></td>
+<td><code>declarerPerte()</code></td>
+<td><code>Perdu</code></td>
+</tr>
+<tr>
+<td><code>EnRetard</code></td>
+<td><code>retourner()</code></td>
+<td><code>Rendu</code></td>
+</tr>
+<tr>
+<td><code>EnRetard</code></td>
+<td><code>declarerPerte()</code></td>
+<td><code>Perdu</code></td>
+</tr>
+<tr>
+<td><code>Rendu</code></td>
+<td>toute action</td>
+<td><code>IllegalStateException</code></td>
+</tr>
+<tr>
+<td><code>Perdu</code></td>
+<td>toute action</td>
+<td><code>IllegalStateException</code></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="api-rest">API REST<a class="headerlink" href="#api-rest" title="Permanent link">&para;</a></h2>
+<h3 id="livres-apilivres">Livres – <code>/api/livres</code><a class="headerlink" href="#livres-apilivres" title="Permanent link">&para;</a></h3>
+<h4 id="get-apilivres"><code>GET /api/livres</code><a class="headerlink" href="#get-apilivres" title="Permanent link">&para;</a></h4>
+<p>Retourne la liste de tous les ouvrages.</p>
+<p><strong>Réponse</strong> <code>200 OK</code>
+<div class="language-json highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="p">[</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">  </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;titre&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Clean Code&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;genre&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Informatique&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;auteur&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Robert C. Martin&quot;</span><span class="w"> </span><span class="p">}</span>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="p">]</span>
+</span></code></pre></div></p>
+<h4 id="get-apilivresid"><code>GET /api/livres/{id}</code><a class="headerlink" href="#get-apilivresid" title="Permanent link">&para;</a></h4>
+<p>Retourne un ouvrage par son id.</p>
+<p><strong>Réponses</strong>
+- <code>200 OK</code> – ouvrage trouvé
+- <code>404 Not Found</code> – ouvrage inexistant</p>
+<h4 id="post-apilivres"><code>POST /api/livres</code><a class="headerlink" href="#post-apilivres" title="Permanent link">&para;</a></h4>
+<p>Crée un nouveau livre.</p>
+<p><strong>Corps de la requête</strong>
+<div class="language-json highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="p">{</span>
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">  </span><span class="nt">&quot;titre&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Clean Code&quot;</span><span class="p">,</span>
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">  </span><span class="nt">&quot;auteur&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Robert C. Martin&quot;</span><span class="p">,</span>
+</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">  </span><span class="nt">&quot;genre&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Informatique&quot;</span>
+</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="p">}</span>
+</span></code></pre></div></p>
+<p><strong>Réponse</strong> <code>201 Created</code>
+<div class="language-json highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="p">{</span><span class="w"> </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;titre&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Clean Code&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;genre&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Informatique&quot;</span><span class="w"> </span><span class="p">}</span>
+</span></code></pre></div></p>
+<h4 id="delete-apilivresid"><code>DELETE /api/livres/{id}</code><a class="headerlink" href="#delete-apilivresid" title="Permanent link">&para;</a></h4>
+<p>Supprime un ouvrage.</p>
+<p><strong>Réponse</strong> <code>204 No Content</code></p>
+<hr />
+<h3 id="emprunts-apiemprunts">Emprunts – <code>/api/emprunts</code><a class="headerlink" href="#emprunts-apiemprunts" title="Permanent link">&para;</a></h3>
+<h4 id="post-apiemprunts"><code>POST /api/emprunts</code><a class="headerlink" href="#post-apiemprunts" title="Permanent link">&para;</a></h4>
+<p>Crée un emprunt pour un exemplaire disponible.</p>
+<p><strong>Corps de la requête</strong>
+<div class="language-json highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="p">{</span><span class="w"> </span><span class="nt">&quot;exemplaireId&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="p">}</span>
+</span></code></pre></div></p>
+<p><strong>Réponses</strong>
+- <code>201 Created</code> – emprunt créé, exemplaire passé à <code>disponible = false</code>
+- <code>500</code> – si l'exemplaire n'est pas disponible (<code>IllegalStateException</code>)</p>
+<h4 id="patch-apiempruntsidretourner"><code>PATCH /api/emprunts/{id}/retourner</code><a class="headerlink" href="#patch-apiempruntsidretourner" title="Permanent link">&para;</a></h4>
+<p>Retourne un emprunt. Passe l'état à <code>Rendu</code> et l'exemplaire à <code>disponible = true</code>.</p>
+<p><strong>Réponse</strong> <code>200 OK</code></p>
+<h4 id="patch-apiempruntsidperte"><code>PATCH /api/emprunts/{id}/perte</code><a class="headerlink" href="#patch-apiempruntsidperte" title="Permanent link">&para;</a></h4>
+<p>Déclare un emprunt comme perdu. Passe l'état à <code>Perdu</code>.</p>
+<p><strong>Réponse</strong> <code>200 OK</code></p>
+<hr />
+<h2 id="ce-qui-manque-a-implementer">Ce qui manque (à implémenter)<a class="headerlink" href="#ce-qui-manque-a-implementer" title="Permanent link">&para;</a></h2>
+<h3 id="fonctionnalites-non-couvertes">Fonctionnalités non couvertes<a class="headerlink" href="#fonctionnalites-non-couvertes" title="Permanent link">&para;</a></h3>
+<p><strong>Gestion des Revues</strong>
+- Aucun endpoint REST ni méthode de service pour créer/lister des <code>Revue</code>.
+- <code>UsineOuvrage.creerOuvrage()</code> crée toujours un <code>Livre</code>. Il faudrait soit un paramètre de type, soit une <code>UsineRevue</code> dédiée.</p>
+<p><strong>Gestion des Exemplaires via l'API</strong>
+- La méthode <code>Bibliotheque.ajouterExemplaire()</code> existe mais aucun controller ne l'expose.
+- Il manque : <code>POST /api/ouvrages/{id}/exemplaires</code> et <code>GET /api/ouvrages/{id}/exemplaires</code>.</p>
+<p><strong>Transition <code>signalerRetard</code> non exposée</strong>
+- <code>Emprunt.signalerRetard()</code> existe en Java mais il n'y a pas d'endpoint <code>PATCH /api/emprunts/{id}/retard</code>.</p>
+<p><strong>Gestion des erreurs (exception handler)</strong>
+- Les <code>IllegalArgumentException</code> et <code>IllegalStateException</code> du service remontent en <code>500</code>. Il manque un <code>@ControllerAdvice</code> pour les mapper proprement en <code>404</code> / <code>400</code> / <code>409</code>.</p>
+<p><strong>Pagination et recherche</strong>
+- <code>OuvrageRepository</code> expose <code>findByTitreContainingIgnoreCase</code> et <code>findByGenre</code> mais ces méthodes ne sont pas appelées depuis le service ni exposées en REST.</p>
+<p><strong>Tests manquants</strong>
+- Aucun test pour <code>EmpruntController</code> (retourner, déclarer perte).
+- Aucun test pour les transitions d'état <code>EnRetard → Rendu</code> depuis l'API.
+- Aucun test pour les cas d'erreur (exemplaire indisponible, emprunt inexistant).</p>
+<hr />
+<h2 id="configuration">Configuration<a class="headerlink" href="#configuration" title="Permanent link">&para;</a></h2>
+<p><code>src/main/resources/application.properties</code></p>
+<div class="language-properties highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="na">spring.datasource.url</span><span class="o">=</span><span class="s">jdbc:h2:mem:librarydb;DB_CLOSE_DELAY=-1</span>
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="na">spring.jpa.hibernate.ddl-auto</span><span class="o">=</span><span class="s">create-drop</span>
+</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="na">spring.jpa.show-sql</span><span class="o">=</span><span class="s">true</span>
+</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="na">spring.h2.console.enabled</span><span class="o">=</span><span class="s">true</span>
+</span><span id="__span-7-5"><a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="na">spring.h2.console.path</span><span class="o">=</span><span class="s">/h2-console</span>
+</span></code></pre></div>
+<p>La console H2 est accessible à <code>http://localhost:8080/h2-console</code> en développement (JDBC URL : <code>jdbc:h2:mem:librarydb</code>).</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-circle-arrow-up" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="m16 12-4-4-4 4M12 16V8"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+        
+          
+          <a href="../Test/Backend/" class="md-footer__link md-footer__link--next" aria-label="Next: Backend">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                Backend
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-arrow-right" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2026 The authors
+
+    </div>
+  
+  
+    Made with
+    <a href="https://zensical.org/" target="_blank" rel="noopener">
+      Zensical
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate":null,"base":"..","features":["announce.dismiss","content.code.annotate","content.code.copy","content.code.select","content.footnote.tooltips","content.tabs.link","content.tooltips","navigation.footer","navigation.indexes","navigation.instant","navigation.instant.prefetch","navigation.path","navigation.sections","navigation.top","navigation.tracking","search.highlight"],"search":"../assets/javascripts/workers/search.e2d2d235.min.js","tags":null,"translations":{"clipboard.copied":"Copied to clipboard","clipboard.copy":"Copy to clipboard","search.result.more.one":"1 more on this page","search.result.more.other":"# more on this page","search.result.none":"No matching documents","search.result.one":"1 matching document","search.result.other":"# matching documents","search.result.placeholder":"Type to start searching","search.result.term.missing":"Missing","select.version":"Select version"},"version":null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.dbc0afdc.min.js"></script>
+      
+    
+  </body>
+</html>
