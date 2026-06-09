@@ -24,7 +24,7 @@ jobs:
           cache: 'maven'
 
       - name: Run Linter (Spotless Modern Formatter)
-        run: 
+        run: |
           mvn spotless:apply
           mvn spotless:check
 
