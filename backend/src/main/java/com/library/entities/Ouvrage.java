@@ -6,23 +6,43 @@ import jakarta.persistence.*;
 @Inheritance(strategy = InheritanceType.JOINED)
 public abstract class Ouvrage {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Long id;
 
-    private String titre;
-    private String genre;
-    private Integer caution;
+  private String titre;
+  private String genre;
+  private Integer caution;
 
-    public Long getId() { return id; }
-    public void setId(Long id) { this.id = id; }
+  public Long getId() {
+    return id;
+  }
 
-    public String getTitre() { return titre; }
-    public void setTitre(String titre) { this.titre = titre; }
+  public void setId(Long id) {
+    this.id = id;
+  }
 
-    public String getGenre() { return genre; }
-    public void setGenre(String genre) { this.genre = genre; }
+  public String getTitre() {
+    return titre;
+  }
 
-    public Integer getCaution() { return caution; }
-    public void setCaution(Integer caution) { this.caution = caution; }
+  public void setTitre(String titre) {
+    this.titre = titre;
+  }
+
+  public String getGenre() {
+    return genre;
+  }
+
+  public void setGenre(String genre) {
+    this.genre = genre;
+  }
+
+  public Integer getCaution() {
+    return caution;
+  }
+
+  public void setCaution(Integer caution) {
+    this.caution = caution;
+  }
 }

@@ -19,65 +19,92 @@ import java.time.LocalDate;
 @Entity
 public class Emprunt {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Long id;
 
-    private LocalDate dateEmprunt = LocalDate.now();
-    private LocalDate dateRetourPrevue;
+  private LocalDate dateEmprunt = LocalDate.now();
+  private LocalDate dateRetourPrevue;
 
-    @ManyToOne
-    @JoinColumn(name = "exemplaire_id")
-    private Exemplaire exemplaire;
+  @ManyToOne
+  @JoinColumn(name = "exemplaire_id")
+  private Exemplaire exemplaire;
 
-    @Transient
-    private EtatEmprunt etatActuel;
+  @Transient private EtatEmprunt etatActuel;
 
-    private String nomEtat = "En cours";
+  private String nomEtat = "En cours";
 
-    public Long getId() { return id; }
-    public void setId(Long id) { this.id = id; }
+  public Long getId() {
+    return id;
+  }
 
-    public LocalDate getDateEmprunt() { return dateEmprunt; }
-    public void setDateEmprunt(LocalDate d) { this.dateEmprunt = d; }
+  public void setId(Long id) {
+    this.id = id;
+  }
 
-    public LocalDate getDateRetourPrevue() { return dateRetourPrevue; }
-    public void setDateRetourPrevue(LocalDate d) { this.dateRetourPrevue = d; }
+  public LocalDate getDateEmprunt() {
+    return dateEmprunt;
+  }
 
-    public Exemplaire getExemplaire() { return exemplaire; }
-    public void setExemplaire(Exemplaire exemplaire) { this.exemplaire = exemplaire; }
+  public void setDateEmprunt(LocalDate d) {
+    this.dateEmprunt = d;
+  }
 
-    public String getNomEtat() { return nomEtat; }
+  public LocalDate getDateRetourPrevue() {
+    return dateRetourPrevue;
+  }
 
-    public void setEtatActuel(EtatEmprunt nouvelEtat) {
-        this.etatActuel = nouvelEtat;
-        this.nomEtat = nouvelEtat.getNom();
+  public void setDateRetourPrevue(LocalDate d) {
+    this.dateRetourPrevue = d;
+  }
+
+  public Exemplaire getExemplaire() {
+    return exemplaire;
+  }
+
+  public void setExemplaire(Exemplaire exemplaire) {
+    this.exemplaire = exemplaire;
+  }
+
+  public String getNomEtat() {
+    return nomEtat;
+  }
+
+  public void setEtatActuel(EtatEmprunt nouvelEtat) {
+    this.etatActuel = nouvelEtat;
+    this.nomEtat = nouvelEtat.getNom();
+  }
+
+  // Reconstitue l'état depuis le nom persisté en base
+  @PostLoad
+  @PostPersist
+  public void initEtat() {
+    switch (nomEtat == null ? "En cours" : nomEtat) {
+      case "Rendu" -> this.etatActuel = new Rendu();
+      case "Perdu" -> this.etatActuel = new Perdu();
+      case "En retard" -> this.etatActuel = new EnRetard();
+      default -> this.etatActuel = new EnCours();
     }
+  }
 
-    // Reconstitue l'état depuis le nom persisté en base
-    @PostLoad
-    @PostPersist
-    public void initEtat() {
-        switch (nomEtat == null ? "En cours" : nomEtat) {
-            case "Rendu"     -> this.etatActuel = new Rendu();
-            case "Perdu"     -> this.etatActuel = new Perdu();
-            case "En retard" -> this.etatActuel = new EnRetard();
-            default          -> this.etatActuel = new EnCours();
-        }
+  public void retourner() {
+    if (etatActuel == null) {
+      initEtat();
     }
+    etatActuel.retourner(this);
+  }
 
-    public void retourner() {
-        if (etatActuel == null) { initEtat(); }
-        etatActuel.retourner(this);
+  public void declarerPerte() {
+    if (etatActuel == null) {
+      initEtat();
     }
+    etatActuel.declarerPerte(this);
+  }
 
-    public void declarerPerte() {
-        if (etatActuel == null) { initEtat(); }
-        etatActuel.declarerPerte(this);
+  public void signalerRetard() {
+    if (etatActuel == null) {
+      initEtat();
     }
-
-    public void signalerRetard() {
-        if (etatActuel == null) { initEtat(); }
-        etatActuel.signalerRetard(this);
-    }
+    etatActuel.signalerRetard(this);
+  }
 }
