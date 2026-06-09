@@ -1,111 +1,121 @@
 package com.library.model;
 
-import static org.junit.jupiter.api.Assertions.*;
-
-import java.util.Map;
+import org.apache.hc.client5.http.impl.classic.HttpClients;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
+import org.springframework.boot.web.client.RestTemplateBuilder;
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.RequestEntity;
+import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.test.context.ActiveProfiles;
+import org.springframework.web.util.UriComponentsBuilder;
+
+import java.util.Map;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @ActiveProfiles("test")
 class EmpruntControllerTest {
 
-  @Autowired private TestRestTemplate restTemplate;
+    @Autowired
+    private TestRestTemplate restTemplate;
 
-  /** Crée un livre + exemplaire, puis emprunte — vérifie 201 et état "En cours" */
-  @Test
-  void doitCreerUnEmprunt() {
-    // 1. Créer un livre
-    var livre =
-        restTemplate.postForEntity(
-            "/api/livres", Map.of("titre", "Test", "auteur", "A", "genre", "Roman"), Map.class);
-    Long livreId = ((Number) livre.getBody().get("id")).longValue();
+    /** Crée un livre + exemplaire, emprunte — vérifie 201 et état "En cours" */
+    @Test
+    void doitCreerUnEmprunt() {
+        Long exId = creerExemplaire("Test-Emprunt", "A-001");
 
-    // 2. Ajouter un exemplaire
-    var exResp =
-        restTemplate.postForEntity(
-            "/api/ouvrages/" + livreId + "/exemplaires", Map.of("cote", "T-001"), Map.class);
-    assertEquals(HttpStatus.CREATED, exResp.getStatusCode());
-    Long exId = ((Number) exResp.getBody().get("id")).longValue();
+        var resp = restTemplate.postForEntity(
+                "/api/emprunts", Map.of("exemplaireId", exId), Map.class);
 
-    // 3. Emprunter
-    var empruntResp =
+        assertEquals(HttpStatus.CREATED, resp.getStatusCode());
+        assertEquals("En cours", resp.getBody().get("nomEtat"));
+    }
+
+    /** Retourner un emprunt → état "Rendu" */
+    @Test
+    void doitRetournerUnEmprunt() {
+        Long empruntId = creerEmpruntComplet("Test-Retour", "B-001");
+
+        Map<?, ?> resp = patch("/api/emprunts/" + empruntId + "/retourner");
+        assertEquals("Rendu", resp.get("nomEtat"));
+    }
+
+    /** Signaler un retard → état "En retard" */
+    @Test
+    void doitSignalerRetard() {
+        Long empruntId = creerEmpruntComplet("Test-Retard", "C-001");
+
+        Map<?, ?> resp = patch("/api/emprunts/" + empruntId + "/retard");
+        assertEquals("En retard", resp.get("nomEtat"));
+    }
+
+    /** Déclarer une perte → état "Perdu" */
+    @Test
+    void doitDeclarerPerte() {
+        Long empruntId = creerEmpruntComplet("Test-Perte", "D-001");
+
+        Map<?, ?> resp = patch("/api/emprunts/" + empruntId + "/perte");
+        assertEquals("Perdu", resp.get("nomEtat"));
+    }
+
+    /** Emprunter un exemplaire déjà emprunté → 409 Conflict */
+    @Test
+    void doitRetourner409SiExemplaireIndisponible() {
+        Long exId = creerExemplaire("Test-Conflit", "E-001");
+
         restTemplate.postForEntity("/api/emprunts", Map.of("exemplaireId", exId), Map.class);
-    assertEquals(HttpStatus.CREATED, empruntResp.getStatusCode());
-    assertEquals("En cours", empruntResp.getBody().get("nomEtat"));
-  }
+        var resp = restTemplate.postForEntity(
+                "/api/emprunts", Map.of("exemplaireId", exId), Map.class);
 
-  /** Retourner un emprunt → état "Rendu" */
-  @Test
-  void doitRetournerUnEmprunt() {
-    Long empruntId = creerEmpruntComplet("Retour-Test", "B-001");
+        assertEquals(HttpStatus.CONFLICT, resp.getStatusCode());
+    }
 
-    var resp =
-        restTemplate.patchForObject("/api/emprunts/" + empruntId + "/retourner", null, Map.class);
-    assertEquals("Rendu", resp.get("nomEtat"));
-  }
+    /** Emprunt inexistant → réponse 404 dans le body */
+    @Test
+    void doitRetourner404SiEmpruntInexistant() {
+        Map<?, ?> resp = patch("/api/emprunts/99999/retourner");
+        assertEquals(404, resp.get("status"));
+    }
 
-  /** Signaler un retard → état "En retard" */
-  @Test
-  void doitSignalerRetard() {
-    Long empruntId = creerEmpruntComplet("Retard-Test", "C-001");
+    // ── Helpers ───────────────────────────────────────────────────────────────
 
-    var resp =
-        restTemplate.patchForObject("/api/emprunts/" + empruntId + "/retard", null, Map.class);
-    assertEquals("En retard", resp.get("nomEtat"));
-  }
+    /**
+     * Envoie un PATCH via HttpComponentsClientHttpRequestFactory
+     * (le client HTTP par défaut de Spring ne supporte pas PATCH).
+     */
+    @SuppressWarnings("unchecked")
+    private Map<?, ?> patch(String url) {
+        TestRestTemplate patchTemplate = new TestRestTemplate(
+                new RestTemplateBuilder()
+                        .requestFactory(() -> new HttpComponentsClientHttpRequestFactory(
+                                HttpClients.createDefault())));
+        // Récupère le port du serveur de test
+        String baseUrl = restTemplate.getRootUri();
+        return patchTemplate.patchForObject(baseUrl + url, null, Map.class);
+    }
 
-  /** Déclarer une perte → état "Perdu" */
-  @Test
-  void doitDeclarerPerte() {
-    Long empruntId = creerEmpruntComplet("Perte-Test", "D-001");
+    private Long creerExemplaire(String titre, String cote) {
+        var livre = restTemplate.postForEntity("/api/livres",
+                Map.of("titre", titre, "auteur", "Auteur", "genre", "Test"), Map.class);
+        Long livreId = ((Number) livre.getBody().get("id")).longValue();
 
-    var resp =
-        restTemplate.patchForObject("/api/emprunts/" + empruntId + "/perte", null, Map.class);
-    assertEquals("Perdu", resp.get("nomEtat"));
-  }
+        var ex = restTemplate.postForEntity(
+                "/api/ouvrages/" + livreId + "/exemplaires",
+                Map.of("cote", cote), Map.class);
+        assertNotNull(ex.getBody(), "La création d'exemplaire a échoué pour l'ouvrage " + livreId);
+        return ((Number) ex.getBody().get("id")).longValue();
+    }
 
-  /** Emprunter un exemplaire déjà emprunté → 409 Conflict */
-  @Test
-  void doitRetourner409SiExemplaireIndisponible() {
-    Long exId = creerExemplaire("Conflit-Test", "E-001");
-
-    // Premier emprunt → OK
-    restTemplate.postForEntity("/api/emprunts", Map.of("exemplaireId", exId), Map.class);
-
-    // Deuxième emprunt → 409
-    var resp = restTemplate.postForEntity("/api/emprunts", Map.of("exemplaireId", exId), Map.class);
-    assertEquals(HttpStatus.CONFLICT, resp.getStatusCode());
-  }
-
-  /** Emprunt inexistant → 404 */
-  @Test
-  void doitRetourner404SiEmpruntInexistant() {
-    var resp = restTemplate.patchForObject("/api/emprunts/99999/retourner", null, Map.class);
-    assertEquals(404, resp.get("status"));
-  }
-
-  // ── Helpers ───────────────────────────────────────────────────────────────
-
-  private Long creerExemplaire(String titre, String cote) {
-    var livre =
-        restTemplate.postForEntity(
-            "/api/livres", Map.of("titre", titre, "auteur", "Auteur", "genre", "Test"), Map.class);
-    Long livreId = ((Number) livre.getBody().get("id")).longValue();
-    var ex =
-        restTemplate.postForEntity(
-            "/api/ouvrages/" + livreId + "/exemplaires", Map.of("cote", cote), Map.class);
-    return ((Number) ex.getBody().get("id")).longValue();
-  }
-
-  private Long creerEmpruntComplet(String titre, String cote) {
-    Long exId = creerExemplaire(titre, cote);
-    var emprunt =
-        restTemplate.postForEntity("/api/emprunts", Map.of("exemplaireId", exId), Map.class);
-    return ((Number) emprunt.getBody().get("id")).longValue();
-  }
+    private Long creerEmpruntComplet(String titre, String cote) {
+        Long exId = creerExemplaire(titre, cote);
+        var emprunt = restTemplate.postForEntity(
+                "/api/emprunts", Map.of("exemplaireId", exId), Map.class);
+        return ((Number) emprunt.getBody().get("id")).longValue();
+    }
 }

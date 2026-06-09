@@ -5,95 +5,79 @@ import com.library.state.EnRetard;
 import com.library.state.EtatEmprunt;
 import com.library.state.Perdu;
 import com.library.state.Rendu;
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.PostLoad;
+import jakarta.persistence.PostPersist;
+import jakarta.persistence.Transient;
 import java.time.LocalDate;
 
 @Entity
 public class Emprunt {
 
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-  private LocalDate dateEmprunt = LocalDate.now();
-  private LocalDate dateRetourPrevue;
+    private LocalDate dateEmprunt = LocalDate.now();
+    private LocalDate dateRetourPrevue;
 
-  @ManyToOne
-  @JoinColumn(name = "exemplaire_id")
-  private Exemplaire exemplaire;
+    @ManyToOne
+    @JoinColumn(name = "exemplaire_id")
+    private Exemplaire exemplaire;
 
-  @Transient private EtatEmprunt etatActuel;
+    @Transient
+    private EtatEmprunt etatActuel;
 
-  // Nom de l'état persisté en base pour l'affichage
-  private String nomEtat = "En cours";
+    private String nomEtat = "En cours";
 
-  // ── Getters / Setters ────────────────────────────────────────────────────
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
 
-  public Long getId() {
-    return id;
-  }
+    public LocalDate getDateEmprunt() { return dateEmprunt; }
+    public void setDateEmprunt(LocalDate d) { this.dateEmprunt = d; }
 
-  public void setId(Long id) {
-    this.id = id;
-  }
+    public LocalDate getDateRetourPrevue() { return dateRetourPrevue; }
+    public void setDateRetourPrevue(LocalDate d) { this.dateRetourPrevue = d; }
 
-  public LocalDate getDateEmprunt() {
-    return dateEmprunt;
-  }
+    public Exemplaire getExemplaire() { return exemplaire; }
+    public void setExemplaire(Exemplaire exemplaire) { this.exemplaire = exemplaire; }
 
-  public void setDateEmprunt(LocalDate dateEmprunt) {
-    this.dateEmprunt = dateEmprunt;
-  }
+    public String getNomEtat() { return nomEtat; }
 
-  public LocalDate getDateRetourPrevue() {
-    return dateRetourPrevue;
-  }
-
-  public void setDateRetourPrevue(LocalDate dateRetourPrevue) {
-    this.dateRetourPrevue = dateRetourPrevue;
-  }
-
-  public Exemplaire getExemplaire() {
-    return exemplaire;
-  }
-
-  public void setExemplaire(Exemplaire exemplaire) {
-    this.exemplaire = exemplaire;
-  }
-
-  public String getNomEtat() {
-    return nomEtat;
-  }
-
-  // Appelé par les classes d'état pour changer l'état courant
-  public void setEtatActuel(EtatEmprunt nouvelEtat) {
-    this.etatActuel = nouvelEtat;
-    this.nomEtat = nouvelEtat.getNom();
-  }
-
-  @PostLoad
-  @PostPersist
-  public void initEtat() {
-    switch (nomEtat == null ? "En cours" : nomEtat) {
-      case "Rendu" -> this.etatActuel = new Rendu();
-      case "Perdu" -> this.etatActuel = new Perdu();
-      case "En retard" -> this.etatActuel = new EnRetard();
-      default -> this.etatActuel = new EnCours();
+    public void setEtatActuel(EtatEmprunt nouvelEtat) {
+        this.etatActuel = nouvelEtat;
+        this.nomEtat = nouvelEtat.getNom();
     }
-  }
 
-  public void retourner() {
-    if (etatActuel == null) etatActuel = new EnCours();
-    etatActuel.retourner(this);
-  }
+    // Reconstitue l'état depuis le nom persisté en base
+    @PostLoad
+    @PostPersist
+    public void initEtat() {
+        switch (nomEtat == null ? "En cours" : nomEtat) {
+            case "Rendu"     -> this.etatActuel = new Rendu();
+            case "Perdu"     -> this.etatActuel = new Perdu();
+            case "En retard" -> this.etatActuel = new EnRetard();
+            default          -> this.etatActuel = new EnCours();
+        }
+    }
 
-  public void declarerPerte() {
-    if (etatActuel == null) etatActuel = new EnCours();
-    etatActuel.declarerPerte(this);
-  }
+    public void retourner() {
+        if (etatActuel == null) { initEtat(); }
+        etatActuel.retourner(this);
+    }
 
-  public void signalerRetard() {
-    if (etatActuel == null) etatActuel = new EnCours();
-    etatActuel.signalerRetard(this);
-  }
+    public void declarerPerte() {
+        if (etatActuel == null) { initEtat(); }
+        etatActuel.declarerPerte(this);
+    }
+
+    public void signalerRetard() {
+        if (etatActuel == null) { initEtat(); }
+        etatActuel.signalerRetard(this);
+    }
 }
