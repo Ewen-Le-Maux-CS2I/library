@@ -1,0 +1,28 @@
+<div class="emprunt-container">
+  <h3>Nouvel Emprunt</h3>
+  <form [formGroup].="empruntForm" (ngSubmit)="soumettreEmprunt()">
+    <input type="number" formControlName="idAdherent" placeholder="ID Adhérent">
+    <input type="number" formControlName="idExemplaire" placeholder="ID Exemplaire">
+    <button type="submit" [disabled]="empruntForm.invalid">Valider l'emprunt</button>
+  </form>
+
+  <h3>Emprunts En Cours</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>Adhérent</th>
+        <th>Ouvrage</th>
+        <th>Code Barre</th>
+        <th>Date de retour prévue</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let emp of emprunts">
+        <td>{{ emp.idAdherent }}</td>
+        <td>{{ emp.exemplaire.ouvrage.titre }}</td>
+        <td>{{ emp.exemplaire.codeBarre }}</td>
+        <td>{{ emp.dateRetourPrevue | date:'dd/MM/yyyy' }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
