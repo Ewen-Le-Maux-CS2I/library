@@ -1,11 +1,5 @@
 package com.library.service;
 
-import java.util.List;
-import java.util.Optional;
-
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
 import com.library.entities.Emprunt;
 import com.library.entities.Exemplaire;
 import com.library.entities.Ouvrage;
@@ -13,6 +7,10 @@ import com.library.factory.UsineOuvrage;
 import com.library.repository.EmpruntRepository;
 import com.library.repository.ExemplaireRepository;
 import com.library.repository.OuvrageRepository;
+import java.util.List;
+import java.util.Optional;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @Transactional
@@ -104,15 +102,15 @@ public class Bibliotheque {
     return empruntRepository.save(emprunt);
   }
 
-    public Emprunt signalerRetard(Long id) {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
+  public Emprunt signalerRetard(Long id) {
+    throw new UnsupportedOperationException("Not supported yet.");
+  }
 
-    public List<Ouvrage> rechercherParTitre(String titre) {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
+  public List<Ouvrage> rechercherParTitre(String titre) {
+    throw new UnsupportedOperationException("Not supported yet.");
+  }
 
-    public List<Ouvrage> rechercherParGenre(String genre) {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
+  public List<Ouvrage> rechercherParGenre(String genre) {
+    throw new UnsupportedOperationException("Not supported yet.");
+  }
 }
