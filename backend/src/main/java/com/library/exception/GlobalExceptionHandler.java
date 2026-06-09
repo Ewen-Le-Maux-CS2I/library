@@ -4,7 +4,6 @@ import java.time.LocalDateTime;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.NoSuchElementException;
-
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -45,12 +44,10 @@ public class GlobalExceptionHandler {
     return ResponseEntity.status(status).body(body);
   }
 
-
-    // Si vous utilisez le .get() d'un Optional ou si votre service lève cette exception
-    @ExceptionHandler(NoSuchElementException.class)
-    public ResponseEntity<Map<String, String>> handleNotFound(NoSuchElementException ex) {
-        return ResponseEntity
-                .status(HttpStatus.NOT_FOUND)
-                .body(Map.of("error", ex.getMessage() != null ? ex.getMessage() : "Ressource non trouvée"));
-    }
+  // Si vous utilisez le .get() d'un Optional ou si votre service lève cette exception
+  @ExceptionHandler(NoSuchElementException.class)
+  public ResponseEntity<Map<String, String>> handleNotFound(NoSuchElementException ex) {
+    return ResponseEntity.status(HttpStatus.NOT_FOUND)
+        .body(Map.of("error", ex.getMessage() != null ? ex.getMessage() : "Ressource non trouvée"));
+  }
 }

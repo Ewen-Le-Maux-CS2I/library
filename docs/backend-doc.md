@@ -13,89 +13,158 @@ Backend Spring Boot pour la gestion d'une bibliothèque. Il expose une API REST 
 
 ---
 
-## Architecture
+## Architecture du projet
 
 ```
-com.library
-├── LibraryApplication.java       ← Point d'entrée Spring Boot
-├── controller/
-│   ├── LivreController.java      ← REST /api/livres
-│   └── EmpruntController.java    ← REST /api/emprunts
-├── service/
-│   └── Bibliotheque.java         ← Logique métier
-├── entities/
-│   ├── Ouvrage.java              ← Classe abstraite (racine JPA)
-│   ├── Livre.java                ← Sous-type d'Ouvrage
-│   ├── Revue.java                ← Sous-type d'Ouvrage
-│   ├── Exemplaire.java           ← Exemplaire physique d'un ouvrage
-│   └── Emprunt.java              ← Emprunt avec machine d'états
-├── factory/
-│   ├── UsineAbstraite.java       ← Abstract Factory (contrat)
-│   └── UsineOuvrage.java         ← Implémentation concrète
-├── state/
-│   ├── EtatEmprunt.java          ← Interface State
-│   ├── EnCours.java
-│   ├── EnRetard.java
-│   ├── Rendu.java
-│   └── Perdu.java
-└── repository/
-    ├── OuvrageRepository.java
-    ├── ExemplaireRepository.java
-    └── EmpruntRepository.java
+.
+├── docker-compose.yml
+└── backend/
+    ├── Dockerfile
+    ├── pom.xml
+    └── src/
+        ├── main/java/com/library/
+        │   ├── LibraryApplication.java
+        │   ├── controller/
+        │   │   ├── LivreController.java        ← GET/POST/DELETE /api/livres
+        │   │   ├── ExemplaireController.java   ← GET/POST /api/ouvrages/{id}/exemplaires
+        │   │   └── EmpruntController.java      ← POST/PATCH /api/emprunts
+        │   ├── exception/
+        │   │   └── GlobalExceptionHandler.java ← @ControllerAdvice (404/409/500)
+        │   ├── service/
+        │   │   └── Bibliotheque.java
+        │   ├── entities/
+        │   │   ├── Ouvrage.java (abstraite)
+        │   │   ├── Livre.java
+        │   │   ├── Revue.java
+        │   │   ├── Exemplaire.java
+        │   │   └── Emprunt.java
+        │   ├── factory/
+        │   │   ├── UsineAbstraite.java
+        │   │   └── UsineOuvrage.java
+        │   ├── state/
+        │   │   ├── EtatEmprunt.java (interface)
+        │   │   ├── EnCours.java
+        │   │   ├── EnRetard.java
+        │   │   ├── Rendu.java
+        │   │   └── Perdu.java
+        │   └── repository/
+        │       ├── OuvrageRepository.java
+        │       ├── ExemplaireRepository.java
+        │       └── EmpruntRepository.java
+        ├── main/resources/
+        │   └── application.properties          ← PostgreSQL (variables d'env)
+        └── test/
+            ├── java/com/library/model/
+            │   ├── UsineProduitTest.java
+            │   ├── EmpruntTest.java
+            │   ├── EtatEmpruntPostLoadTest.java ← test reconstitution @PostLoad
+            │   ├── BibliothequePersistanceTest.java
+            │   ├── LivreControllerTest.java
+            │   ├── LivreRechercheTest.java
+            │   ├── ExemplaireControllerTest.java
+            │   ├── EmpruntControllerTest.java
+            │   └── DemoApplicationTests.java
+            └── resources/
+                └── application-test.properties ← H2 en mémoire pour les tests
 ```
 
 ---
 
-## Modèle de données
+## Où placer le GlobalExceptionHandler
 
-### Hiérarchie des ouvrages
+**Fichier :** `src/main/java/com/library/exception/GlobalExceptionHandler.java`
 
-`Ouvrage` est la classe abstraite
+C'est la convention Spring : un sous-package `exception/` (ou `advice/`) dédié,
+séparé des controllers. L'annotation `@ControllerAdvice` le rend visible à tout
+le contexte Spring sans configuration supplémentaire.
 
-| Champ | Type | Description |
-|---|---|---|
-| `id` | `Long` | Identifiant auto-généré |
-| `titre` | `String` | Titre de l'ouvrage |
-| `genre` | `String` | Genre littéraire |
-| `caution` | `Integer` | Montant de la caution |
-
-**Livre** étend `Ouvrage` et ajoute :
-
-| Champ | Type |
+| Exception levée par | Mappée en |
 |---|---|
-| `auteur` | `String` |
-| `isbn` | `Long` |
-| `datePublication` | `Integer` |
+| `IllegalArgumentException` | `404 Not Found` |
+| `IllegalStateException` | `409 Conflict` |
+| `Exception` (catch-all) | `500 Internal Server Error` |
 
-**Revue** étend `Ouvrage` et ajoute :
+Chaque réponse d'erreur a la structure :
+```json
+{
+  "timestamp": "2026-06-08T10:00:00",
+  "status": 404,
+  "error": "Not Found",
+  "message": "Ouvrage introuvable : 99"
+}
+```
 
-| Champ | Type |
-|---|---|
-| `numero` | `String` |
-| `dateParution` | `LocalDate` |
+---
 
-### Exemplaire
+## API REST complète
 
-Représente un exemplaire physique d'un ouvrage en rayon.
+### Livres – `/api/livres`
 
-| Champ | Type | Description |
-|---|---|---|
-| `id` | `Long` | Identifiant auto-généré |
-| `cote` | `String` | Cote de classement |
-| `disponible` | `boolean` | `true` si empruntable |
-| `ouvrage` | `Ouvrage` | Référence à l'ouvrage (ManyToOne) |
+| Méthode | URL | Description | Code |
+|---|---|---|---|
+| `GET` | `/api/livres` | Liste tous les ouvrages | 200 |
+| `GET` | `/api/livres?titre=dune` | Recherche insensible à la casse | 200 |
+| `GET` | `/api/livres?genre=SF` | Filtre par genre exact | 200 |
+| `GET` | `/api/livres/{id}` | Un ouvrage par id | 200 / 404 |
+| `POST` | `/api/livres` | Crée un livre | 201 |
+| `DELETE` | `/api/livres/{id}` | Supprime un ouvrage | 204 |
 
-### Emprunt
+**POST /api/livres**
+```json
+{ "titre": "Dune", "auteur": "Frank Herbert", "genre": "SF" }
+```
 
-| Champ | Type | Description |
-|---|---|---|
-| `id` | `Long` | Identifiant auto-généré |
-| `dateEmprunt` | `LocalDate` | Date de création (défaut : aujourd'hui) |
-| `dateRetourPrevue` | `LocalDate` | Date de retour prévue |
-| `exemplaire` | `Exemplaire` | Exemplaire emprunté (ManyToOne) |
-| `nomEtat` | `String` | État courant persisté (`"En cours"` par défaut) |
+---
 
-> L'état courant (`etatActuel`) est `@Transient` : il n'est pas persisté, mais reconstruit à chaque chargement JPA via `@PostLoad`.
+### Exemplaires – `/api/ouvrages/{id}/exemplaires`
+
+| Méthode | URL | Description | Code |
+|---|---|---|---|
+| `GET` | `/api/ouvrages/{id}/exemplaires` | Liste les exemplaires d'un ouvrage | 200 |
+| `POST` | `/api/ouvrages/{id}/exemplaires` | Ajoute un exemplaire | 201 / 404 |
+
+**POST /api/ouvrages/1/exemplaires**
+```json
+{ "cote": "SF-001" }
+```
+
+---
+
+### Emprunts – `/api/emprunts`
+
+| Méthode | URL | Description | Code |
+|---|---|---|---|
+| `POST` | `/api/emprunts` | Crée un emprunt | 201 / 409 |
+| `PATCH` | `/api/emprunts/{id}/retourner` | Retourne un emprunt | 200 |
+| `PATCH` | `/api/emprunts/{id}/retard` | Signale un retard | 200 |
+| `PATCH` | `/api/emprunts/{id}/perte` | Déclare une perte | 200 |
+
+**POST /api/emprunts**
+```json
+{ "exemplaireId": 1 }
+```
+
+---
+
+## Machine d'états des emprunts
+
+```
+            signalerRetard()
+ EnCours ──────────────────► EnRetard
+    │                             │
+    │ retourner()                 │ retourner()
+    ▼                             ▼
+  Rendu ◄──────────────────── Rendu
+
+ EnCours  ─── declarerPerte() ──► Perdu
+ EnRetard ─── declarerPerte() ──► Perdu
+```
+
+Les transitions invalides (ex : `retourner()` sur un emprunt `Perdu`) lèvent
+une `IllegalStateException` → retournée en `409 Conflict` par le handler.
+
+**Reconstitution après rechargement JPA :** le champ `nomEtat` est persisté en base.
+`@PostLoad` reconstruit l'objet `EtatEmprunt` correct via un `switch` sur ce nom.
 
 ---
 
@@ -103,157 +172,60 @@ Représente un exemplaire physique d'un ouvrage en rayon.
 
 ### Abstract Factory
 
-`UsineAbstraite` définit le contrat de création. `UsineOuvrage` est l'implémentation concrète enregistrée comme bean Spring (`@Component`).
+`UsineAbstraite` définit le contrat. `UsineOuvrage` est l'implémentation Spring.
 
 ```java
-// Créer un livre
-Ouvrage livre = usineOuvrage.creerOuvrage("Dune", "Science-Fiction", "Frank Herbert");
-
-// Créer un exemplaire
-Exemplaire ex = usineOuvrage.creerExemplaire(livre, "SF-001");
+Ouvrage livre     = usineOuvrage.creerOuvrage("Dune", "SF", "Herbert");
+Exemplaire ex     = usineOuvrage.creerExemplaire(livre, "SF-001");
 ```
 
-**Ce qui manque / à implémenter si besoin :** une `UsineRevue` pour créer des `Revue` via la même interface.
+### State pattern
 
-### State – Machine d'états d'un Emprunt
+Chaque état (`EnCours`, `EnRetard`, `Rendu`, `Perdu`) implémente `EtatEmprunt`
+et gère ses propres transitions. `Emprunt` délègue et met à jour `nomEtat`.
 
-```
-         signalerRetard()
-EnCours ─────────────────► EnRetard
-   │                           │
-   │ retourner()               │ retourner()
-   ▼                           ▼
-Rendu ◄─────────────────── Rendu
+---
 
-EnCours ──declarerPerte()──► Perdu
-EnRetard ─declarerPerte()──► Perdu
+## Tests
+
+Lancer tous les tests (H2 en mémoire, pas besoin de Docker) :
+```bash
+cd backend && mvn test
 ```
 
-Transitions autorisées :
-
-| État initial | Action | État final |
+| Fichier de test | Type | Ce qu'il couvre |
 |---|---|---|
-| `EnCours` | `retourner()` | `Rendu` |
-| `EnCours` | `signalerRetard()` | `EnRetard` |
-| `EnCours` | `declarerPerte()` | `Perdu` |
-| `EnRetard` | `retourner()` | `Rendu` |
-| `EnRetard` | `declarerPerte()` | `Perdu` |
-| `Rendu` | toute action | `IllegalStateException` |
-| `Perdu` | toute action | `IllegalStateException` |
+| `UsineProduitTest` | Unitaire | Création Livre via UsineOuvrage |
+| `EmpruntTest` | Unitaire | Toutes les transitions d'état |
+| `EtatEmpruntPostLoadTest` | `@DataJpaTest` | Reconstitution état après @PostLoad |
+| `BibliothequePersistanceTest` | `@DataJpaTest` | Persistance JPA |
+| `LivreControllerTest` | `@SpringBootTest` | CRUD livres HTTP |
+| `LivreRechercheTest` | `@SpringBootTest` | Recherche par titre/genre |
+| `ExemplaireControllerTest` | `@SpringBootTest` | CRUD exemplaires HTTP + 404 |
+| `EmpruntControllerTest` | `@SpringBootTest` | Emprunt, retour, retard, perte, 409, 404 |
+| `DemoApplicationTests` | `@SpringBootTest` | Démarrage contexte Spring |
+
+Les tests utilisent le profil `test` (`@ActiveProfiles("test")`) qui active H2
+via `src/test/resources/application-test.properties`.
 
 ---
-
-## API REST
-
-### Livres – `/api/livres`
-
-#### `GET /api/livres`
-Retourne la liste de tous les ouvrages.
-
-**Réponse** `200 OK`
-```json
-[
-  { "id": 1, "titre": "Clean Code", "genre": "Informatique", "auteur": "Robert C. Martin" }
-]
-```
-
-#### `GET /api/livres/{id}`
-Retourne un ouvrage par son id.
-
-**Réponses**
-- `200 OK` – ouvrage trouvé
-- `404 Not Found` – ouvrage inexistant
-
-#### `POST /api/livres`
-Crée un nouveau livre.
-
-**Corps de la requête**
-```json
-{
-  "titre": "Clean Code",
-  "auteur": "Robert C. Martin",
-  "genre": "Informatique"
-}
-```
-
-**Réponse** `201 Created`
-```json
-{ "id": 1, "titre": "Clean Code", "genre": "Informatique" }
-```
-
-#### `DELETE /api/livres/{id}`
-Supprime un ouvrage.
-
-**Réponse** `204 No Content`
-
----
-
-### Emprunts – `/api/emprunts`
-
-#### `POST /api/emprunts`
-Crée un emprunt pour un exemplaire disponible.
-
-**Corps de la requête**
-```json
-{ "exemplaireId": 1 }
-```
-
-**Réponses**
-- `201 Created` – emprunt créé, exemplaire passé à `disponible = false`
-- `500` – si l'exemplaire n'est pas disponible (`IllegalStateException`)
-
-#### `PATCH /api/emprunts/{id}/retourner`
-Retourne un emprunt. Passe l'état à `Rendu` et l'exemplaire à `disponible = true`.
-
-**Réponse** `200 OK`
-
-#### `PATCH /api/emprunts/{id}/perte`
-Déclare un emprunt comme perdu. Passe l'état à `Perdu`.
-
-**Réponse** `200 OK`
-
----
-
-## Ce qui manque (à implémenter)
-
-### Fonctionnalités non couvertes
-
-**Gestion des Revues**
-- Aucun endpoint REST ni méthode de service pour créer/lister des `Revue`.
-- `UsineOuvrage.creerOuvrage()` crée toujours un `Livre`. Il faudrait soit un paramètre de type, soit une `UsineRevue` dédiée.
-
-**Gestion des Exemplaires via l'API**
-- La méthode `Bibliotheque.ajouterExemplaire()` existe mais aucun controller ne l'expose.
-- Il manque : `POST /api/ouvrages/{id}/exemplaires` et `GET /api/ouvrages/{id}/exemplaires`.
-
-**Transition `signalerRetard` non exposée**
-- `Emprunt.signalerRetard()` existe en Java mais il n'y a pas d'endpoint `PATCH /api/emprunts/{id}/retard`.
-
-**Gestion des erreurs (exception handler)**
-- Les `IllegalArgumentException` et `IllegalStateException` du service remontent en `500`. Il manque un `@ControllerAdvice` pour les mapper proprement en `404` / `400` / `409`.
-
-**Pagination et recherche**
-- `OuvrageRepository` expose `findByTitreContainingIgnoreCase` et `findByGenre` mais ces méthodes ne sont pas appelées depuis le service ni exposées en REST.
-
-**Tests manquants**
-- Aucun test pour `EmpruntController` (retourner, déclarer perte).
-- Aucun test pour les transitions d'état `EnRetard → Rendu` depuis l'API.
-- Aucun test pour les cas d'erreur (exemplaire indisponible, emprunt inexistant).
-
----
-
-
 
 ## Configuration
 
-`src/main/resources/application.properties`
+### Production (Docker)
 
-```properties
-spring.datasource.url=jdbc:h2:mem:librarydb;DB_CLOSE_DELAY=-1
-spring.jpa.hibernate.ddl-auto=create-drop
-spring.jpa.show-sql=true
-spring.h2.console.enabled=true
-spring.h2.console.path=/h2-console
-```
+Les variables d'environnement sont injectées par Docker Compose :
 
-La console H2 est accessible à `http://localhost:8080/h2-console` en développement (JDBC URL : `jdbc:h2:mem:librarydb`).
+| Variable | Valeur par défaut | Description |
+|---|---|---|
+| `DB_HOST` | `localhost` | Hôte PostgreSQL |
+| `DB_PORT` | `5432` | Port PostgreSQL |
+| `DB_NAME` | `librarydb` | Nom de la base |
+| `DB_USER` | `library` | Utilisateur |
+| `DB_PASSWORD` | `library` | Mot de passe |
+
+### Tests (H2)
+
+`src/test/resources/application-test.properties` — activé automatiquement
+via `@ActiveProfiles("test")` sur chaque classe de test.
+

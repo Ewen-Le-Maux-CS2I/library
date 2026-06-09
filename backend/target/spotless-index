@@ -7,7 +7,7 @@ src\main\java\com\library\entities\Exemplaire.java 2026-06-09T08:28:39.404166900
 src\main\java\com\library\entities\Livre.java 2026-06-09T08:28:39.418492500Z
 src\main\java\com\library\entities\Ouvrage.java 2026-06-09T08:28:39.436637800Z
 src\main\java\com\library\entities\Revue.java 2026-06-09T08:28:39.448840200Z
-src\main\java\com\library\exception\GlobalExceptionHandler.java 2026-06-09T08:28:39.471269700Z
+src\main\java\com\library\exception\GlobalExceptionHandler.java 2026-06-09T09:21:48.015988900Z
 src\main\java\com\library\factory\UsineAbstraite.java 2026-06-09T08:28:39.502378500Z
 src\main\java\com\library\factory\UsineOuvrage.java 2026-06-09T08:28:39.540758100Z
 src\main\java\com\library\LibraryApplication.java 2026-06-09T08:28:39.555270700Z
@@ -26,6 +26,6 @@ src\test\java\com\library\model\EmpruntControllerTest.java 2026-06-09T08:28:39.7
 src\test\java\com\library\model\EmpruntTest.java 2026-06-09T08:28:39.808625500Z
 src\test\java\com\library\model\EtatEmpruntPostLoadTest.java 2026-06-09T08:28:39.833445100Z
 src\test\java\com\library\model\ExemplaireControllerTest.java 2026-06-09T08:28:39.852187500Z
-src\test\java\com\library\model\LivreControllerTest.java 2026-06-09T08:30:48.211046300Z
+src\test\java\com\library\model\LivreControllerTest.java 2026-06-09T09:21:48.049447700Z
 src\test\java\com\library\model\LivreRechercheTest.java 2026-06-09T08:30:48.251140500Z
 src\test\java\com\library\model\UsineProduitTest.java 2026-06-09T08:30:48.273625400Z
