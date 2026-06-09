@@ -9,7 +9,6 @@ import { Emprunt } from '../../models/emprunt.model';
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './emprunt-manager.component.html',
-  styleUrls: ['./emprunt-manager.component.scss']
 })
 export class EmpruntManagerComponent implements OnInit {
   empruntForm: FormGroup;

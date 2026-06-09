@@ -1,0 +1,27 @@
+<div class="container">
+  <h2>Catalogue des Ouvrages</h2>
+  <p class="subtitle">Gestion unifiée des Livres et Revues (Abstract Factory)</p>
+
+  <div class="grid-ouvrages">
+    @for (ouvrage of ouvrages; track ouvrage.id) {
+      <div class="card-ouvrage">
+        <div class="header-card">
+          <span [class]="'badge ' + ouvrage.type.toLowerCase()">{{ ouvrage.type }}</span>
+          <h3>{{ ouvrage.titre }}</h3>
+        </div>
+        
+        <div class="body-card">
+          <p><strong>Auteur / Éditeur :</strong> {{ ouvrage.auteur }}</p>
+          
+          @if (ouvrage.type === 'LIVRE') {
+            <p><strong>ISBN :</strong> {{ ouvrage.isbn }}</p>
+          } @else if (ouvrage.type === 'REVUE') {
+            <p><strong>Numéro de revue :</strong> N°{{ ouvrage.numero }}</p>
+          }
+        </div>
+      </div>
+    } @empty {
+      <p class="empty-msg">Aucun ouvrage disponible dans le catalogue pour le moment.</p>
+    }
+  </div>
+</div>
