@@ -1,10 +1,13 @@
+C:\Users\user\Desktop\library_cicd\backend\src\main\java\com\library\config\OpenApiConfig.java
 C:\Users\user\Desktop\library_cicd\backend\src\main\java\com\library\controller\EmpruntController.java
+C:\Users\user\Desktop\library_cicd\backend\src\main\java\com\library\controller\ExemplaireController.java
 C:\Users\user\Desktop\library_cicd\backend\src\main\java\com\library\controller\LivreController.java
 C:\Users\user\Desktop\library_cicd\backend\src\main\java\com\library\entities\Emprunt.java
 C:\Users\user\Desktop\library_cicd\backend\src\main\java\com\library\entities\Exemplaire.java
 C:\Users\user\Desktop\library_cicd\backend\src\main\java\com\library\entities\Livre.java
 C:\Users\user\Desktop\library_cicd\backend\src\main\java\com\library\entities\Ouvrage.java
 C:\Users\user\Desktop\library_cicd\backend\src\main\java\com\library\entities\Revue.java
+C:\Users\user\Desktop\library_cicd\backend\src\main\java\com\library\exception\GlobalExceptionHandler.java
 C:\Users\user\Desktop\library_cicd\backend\src\main\java\com\library\factory\UsineAbstraite.java
 C:\Users\user\Desktop\library_cicd\backend\src\main\java\com\library\factory\UsineOuvrage.java
 C:\Users\user\Desktop\library_cicd\backend\src\main\java\com\library\LibraryApplication.java

@@ -1,5 +1,13 @@
-com\library\model\EmpruntTest.class
 com\library\model\LivreControllerTest.class
-com\library\model\DemoApplicationTests.class
+com\library\model\LivreRechercheTest$1.class
+com\library\model\LivreRechercheTest.class
+com\library\model\LivreRechercheTest$2.class
 com\library\model\BibliothequePersistanceTest.class
+com\library\model\EmpruntTest.class
+com\library\model\ExemplaireControllerTest.class
+com\library\model\EtatEmpruntPostLoadTest.class
+com\library\model\EmpruntControllerTest.class
+com\library\model\ExemplaireControllerTest$1.class
+com\library\model\LivreRechercheTest$3.class
+com\library\model\DemoApplicationTests.class
 com\library\model\UsineProduitTest.class

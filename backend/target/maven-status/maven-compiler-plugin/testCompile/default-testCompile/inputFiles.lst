@@ -1,5 +1,9 @@
 C:\Users\user\Desktop\library_cicd\backend\src\test\java\com\library\model\BibliothequePersistanceTest.java
 C:\Users\user\Desktop\library_cicd\backend\src\test\java\com\library\model\DemoApplicationTests.java
+C:\Users\user\Desktop\library_cicd\backend\src\test\java\com\library\model\EmpruntControllerTest.java
 C:\Users\user\Desktop\library_cicd\backend\src\test\java\com\library\model\EmpruntTest.java
+C:\Users\user\Desktop\library_cicd\backend\src\test\java\com\library\model\EtatEmpruntPostLoadTest.java
+C:\Users\user\Desktop\library_cicd\backend\src\test\java\com\library\model\ExemplaireControllerTest.java
 C:\Users\user\Desktop\library_cicd\backend\src\test\java\com\library\model\LivreControllerTest.java
+C:\Users\user\Desktop\library_cicd\backend\src\test\java\com\library\model\LivreRechercheTest.java
 C:\Users\user\Desktop\library_cicd\backend\src\test\java\com\library\model\UsineProduitTest.java

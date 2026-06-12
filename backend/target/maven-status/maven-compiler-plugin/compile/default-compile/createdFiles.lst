@@ -10,9 +10,12 @@ com\library\LibraryApplication.class
 com\library\state\Perdu.class
 com\library\entities\Emprunt.class
 com\library\factory\UsineOuvrage.class
+com\library\exception\GlobalExceptionHandler.class
 com\library\entities\Livre.class
 com\library\factory\UsineAbstraite.class
 com\library\state\Rendu.class
+com\library\controller\ExemplaireController.class
+com\library\config\OpenApiConfig.class
 com\library\state\EtatEmprunt.class
 com\library\controller\EmpruntController.class
 com\library\controller\LivreController.class
