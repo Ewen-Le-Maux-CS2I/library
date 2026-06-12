@@ -1,14 +1,13 @@
-name: Angular CI (Frontend TDD)
+name: Angular
 
-# Déclencheurs : Le workflow s'exécute à chaque push ou pull request sur la branche principale
 on:
   push:
-    branches: [ main, master ]
+    branches: [ main]
   pull_request:
-    branches: [ main, master ]
+    branches: [ main]
 
 jobs:
-  build-and-test:
+  build:
     runs-on: ubuntu-24.04
 
     steps:
@@ -18,15 +17,18 @@ jobs:
     - name: Configuration de Node.js
       uses: actions/setup-node@v4
       with:
-        node-version: 20
+        node-version: 26
         cache: 'npm' 
 
 
     - name: Installation des dépendances
       run: npm ci
 
+    - name: Audit et Correction des vulnérabilités
+      run: npm audit fix 
 
-    - name: Vérification de la compilation (Build)
+
+    - name: Vérification de la compilation 
       run: npm run build -- --configuration=production
 
 
