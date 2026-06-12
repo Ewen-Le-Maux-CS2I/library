@@ -1,4 +1,5 @@
 com\library\entities\Revue.class
+com\library\config\DataInitializer.class
 com\library\repository\OuvrageRepository.class
 com\library\service\Bibliotheque.class
 com\library\entities\Exemplaire.class
