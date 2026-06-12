@@ -3,6 +3,6 @@ export interface Ouvrage {
   titre: string;
   auteur: string;
   type: 'LIVRE' | 'REVUE'; // Permet de gérer la factory
-  isbn?: string;       // Spécifique au Livre
-  numero?: number;     // Spécifique à la Revue
+  isbn?: string; // Spécifique au Livre
+  numero?: number; // Spécifique à la Revue
 }

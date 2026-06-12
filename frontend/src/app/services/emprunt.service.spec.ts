@@ -10,7 +10,7 @@ describe('EmpruntService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
-      providers: [EmpruntService]
+      providers: [EmpruntService],
     });
     service = TestBed.inject(EmpruntService);
     httpMock = TestBed.inject(HttpTestingController);
@@ -21,12 +21,17 @@ describe('EmpruntService', () => {
   it('devrait envoyer une requête POST pour enregistrer un emprunt', () => {
     const mockEmprunt: Emprunt = {
       idAdherent: 42,
-      exemplaire: { id: 1, codeBarre: 'EX-123', disponible: true, ouvrage: { titre: 'Test', auteur: 'Auteur', type: 'LIVRE' } },
+      exemplaire: {
+        id: 1,
+        codeBarre: 'EX-123',
+        disponible: true,
+        ouvrage: { titre: 'Test', auteur: 'Auteur', type: 'LIVRE' },
+      },
       dateEmprunt: '2026-06-09',
-      dateRetourPrevue: '2026-06-23'
+      dateRetourPrevue: '2026-06-23',
     };
 
-    service.enregistrerEmprunt(42, 1).subscribe(res => {
+    service.enregistrerEmprunt(42, 1).subscribe((res) => {
       expect(res).toEqual(mockEmprunt);
     });
 

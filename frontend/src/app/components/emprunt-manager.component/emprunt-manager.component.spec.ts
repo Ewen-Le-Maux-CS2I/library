@@ -21,15 +21,13 @@ describe('EmpruntManagerComponent', () => {
       this.enregistrerEmpruntAppele = true;
       this.valeursEnregistrees = { idAdherent, idExemplaire };
       return of({}); // Renvoie un flux valide pour la souscription (.subscribe)
-    }
+    },
   };
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [EmpruntManagerComponent, ReactiveFormsModule],
-      providers: [
-        { provide: EmpruntService, useValue: mockEmpruntService }
-      ]
+      providers: [{ provide: EmpruntService, useValue: mockEmpruntService }],
     }).compileComponents();
 
     fixture = TestBed.createComponent(EmpruntManagerComponent);
@@ -40,7 +38,7 @@ describe('EmpruntManagerComponent', () => {
   it('devrait soumettre le formulaire et appeler le service avec les bonnes valeurs', () => {
     // Remplissage du formulaire réactif
     component.empruntForm.setValue({ idAdherent: 101, idExemplaire: 5 });
-    
+
     // Appel de la méthode de soumission
     component.soumettreEmprunt();
 

@@ -9,23 +9,23 @@ describe('LivreService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
-      providers: [LivreService]
+      providers: [LivreService],
     });
     service = TestBed.inject(LivreService);
     httpMock = TestBed.inject(HttpTestingController);
   });
 
   afterEach(() => {
-    httpMock.verify(); 
+    httpMock.verify();
   });
 
   it('devrait récupérer la liste des livres depuis le backend (GET)', () => {
     const dummyLivres = [
       { id: 1, titre: 'Le Nom de la Rose', auteur: 'Umberto Eco', isbn: '12345' },
-      { id: 2, titre: 'Dune', auteur: 'Frank Herbert', isbn: '67890' }
+      { id: 2, titre: 'Dune', auteur: 'Frank Herbert', isbn: '67890' },
     ];
 
-    service.getLivres().subscribe(livres => {
+    service.getLivres().subscribe((livres) => {
       expect(livres.length).toBe(2);
       expect(livres).toEqual(dummyLivres);
     });

@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { Ouvrage } from '../models/ouvrage.model';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class OuvrageService {
   private apiUrl = 'http://localhost:8080/api/ouvrages';

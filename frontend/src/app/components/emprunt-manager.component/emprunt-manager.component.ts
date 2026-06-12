@@ -14,10 +14,13 @@ export class EmpruntManagerComponent implements OnInit {
   empruntForm: FormGroup;
   emprunts: Emprunt[] = [];
 
-  constructor(private fb: FormBuilder, private empruntService: EmpruntService) {
+  constructor(
+    private fb: FormBuilder,
+    private empruntService: EmpruntService,
+  ) {
     this.empruntForm = this.fb.group({
       idAdherent: ['', Validators.required],
-      idExemplaire: ['', Validators.required]
+      idExemplaire: ['', Validators.required],
     });
   }
 
@@ -26,7 +29,7 @@ export class EmpruntManagerComponent implements OnInit {
   }
 
   chargerEmprunts() {
-    this.empruntService.getEmpruntsActifs().subscribe(data => this.emprunts = data);
+    this.empruntService.getEmpruntsActifs().subscribe((data) => (this.emprunts = data));
   }
 
   soumettreEmprunt() {

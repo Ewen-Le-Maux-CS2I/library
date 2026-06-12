@@ -10,7 +10,7 @@ describe('OuvrageService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
-      providers: [OuvrageService]
+      providers: [OuvrageService],
     });
     service = TestBed.inject(OuvrageService);
     httpMock = TestBed.inject(HttpTestingController);
@@ -23,10 +23,10 @@ describe('OuvrageService', () => {
   it('devrait recuperer tous les ouvrages (Livres et Revues) via un GET', () => {
     const mockOuvrages: Ouvrage[] = [
       { id: 1, titre: 'Les Misérables', auteur: 'Victor Hugo', type: 'LIVRE', isbn: '9782070409242' },
-      { id: 2, titre: 'Science & Vie N°1200', auteur: 'Rédaction', type: 'REVUE', numero: 1200 }
+      { id: 2, titre: 'Science & Vie N°1200', auteur: 'Rédaction', type: 'REVUE', numero: 1200 },
     ];
 
-    service.getOuvrages().subscribe(ouvrages => {
+    service.getOuvrages().subscribe((ouvrages) => {
       expect(ouvrages.length).toBe(2);
       expect(ouvrages).toEqual(mockOuvrages);
     });

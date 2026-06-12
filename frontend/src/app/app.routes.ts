@@ -5,5 +5,5 @@ import { EmpruntManagerComponent } from './components/emprunt-manager.component/
 export const routes: Routes = [
   { path: 'ouvrages', component: OuvrageListComponent },
   { path: 'emprunts', component: EmpruntManagerComponent },
-  { path: '', redirectTo: '/ouvrages', pathMatch: 'full' }
+  { path: '', redirectTo: '/ouvrages', pathMatch: 'full' },
 ];

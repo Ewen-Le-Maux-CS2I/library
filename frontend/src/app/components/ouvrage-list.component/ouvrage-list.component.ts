@@ -16,8 +16,8 @@ export class OuvrageListComponent implements OnInit {
 
   ngOnInit(): void {
     this.ouvrageService.getOuvrages().subscribe({
-      next: (data) => this.ouvrages = data,
-      error: (err) => console.error('Erreur lors du chargement des ouvrages', err)
+      next: (data) => (this.ouvrages = data),
+      error: (err) => console.error('Erreur lors du chargement des ouvrages', err),
     });
   }
 }

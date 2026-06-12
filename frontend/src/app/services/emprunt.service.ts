@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { Emprunt } from '../models/emprunt.model';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class EmpruntService {
   private apiUrl = 'http://localhost:8080/api/emprunts';
