@@ -1,7 +1,3 @@
-----
-title: Introduction
-
----
 
 # Documentation du Projet Library
 
