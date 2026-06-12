@@ -1,0 +1,38 @@
+<div class="container mx-auto p-6 max-w-7xl">
+  <header class="mb-8">
+    <h2 class="text-3xl font-bold text-gray-9xl tracking-tight">Catalogue des Livres</h2>
+  </header>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    @for (livre of livres; track livre.id) {
+      <div
+        class="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden hover:shadow-md transition-shadow duration-200"
+      >
+        <div class="p-5">
+          <div class="flex items-center justify-between mb-4">
+            <span
+              class="inline-flex items-center rounded-md px-2.5 py-0.5 text-xs font-medium ring-1 ring-inset bg-blue-50 text-blue-700 ring-blue-700/10"
+            >
+              LIVRE
+            </span>
+            <span class="text-xs text-gray-400">#{{ livre.id }}</span>
+          </div>
+
+          <h3 class="text-lg font-semibold text-gray-900 mb-2">{{ livre.titre }}</h3>
+
+          <div class="space-y-1 text-sm text-gray-600">
+            <p><span class="font-medium text-gray-500">Auteur :</span> {{ livre.auteur }}</p>
+            <p>
+              <span class="font-medium text-gray-500">ISBN :</span>
+              <code class="bg-gray-100 px-1 rounded text-xs">{{ livre.isbn }}</code>
+            </p>
+          </div>
+        </div>
+      </div>
+    } @empty {
+      <div class="col-span-full text-center py-12 bg-gray-50 rounded-xl border border-dashed border-gray-300">
+        <p class="text-gray-500 font-medium">Aucun livre disponible dans le catalogue pour le moment.</p>
+      </div>
+    }
+  </div>
+</div>

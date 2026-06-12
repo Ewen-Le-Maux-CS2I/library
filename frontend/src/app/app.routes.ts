@@ -1,9 +1,9 @@
 import { Routes } from '@angular/router';
-import { OuvrageListComponent } from './components/ouvrage-list.component/ouvrage-list.component';
+import { LivreListComponent } from './components/livre-list.component/livre-list.component';
 import { EmpruntManagerComponent } from './components/emprunt-manager.component/emprunt-manager.component';
 
 export const routes: Routes = [
-  { path: 'ouvrages', component: OuvrageListComponent },
+  { path: 'livres', component: LivreListComponent },
   { path: 'emprunts', component: EmpruntManagerComponent },
-  { path: '', redirectTo: '/ouvrages', pathMatch: 'full' },
+  { path: '', redirectTo: '/livres', pathMatch: 'full' },
 ];
