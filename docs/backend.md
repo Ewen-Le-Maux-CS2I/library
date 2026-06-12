@@ -1,4 +1,3 @@
-# Backend
 
 ## Vue d'ensemble
 

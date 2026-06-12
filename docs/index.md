@@ -3,7 +3,7 @@ title: Introduction
 
 ---
 
-# Documentation du Projet CI/CD Library
+# Documentation du Projet Library
 
 Vous trouverez dans cette documentation tout ce q'uil faut savoir sur le projet Library.
 
