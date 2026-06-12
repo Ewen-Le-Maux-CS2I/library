@@ -44,7 +44,7 @@ describe('LivreListComponent', () => {
     fixture.detectChanges();
 
     expect(mockLivreService.getLivresAppele).toBe(true);
-    expect(component.livres.length).toBe(2);
+    expect(component.livres().length).toBe(2);
 
     const titres = fixture.debugElement
       .queryAll(By.css('h3'))
