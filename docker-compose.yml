@@ -39,5 +39,17 @@ services:
       database:
         condition: service_healthy
 
+  # --- APPLICATION ANGULAR (FRONTEND) ---
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: library-frontend
+    restart: always
+    ports:
+      - "80:80"  # Rend le front accessible sur http://localhost
+    depends_on:
+      - backend
+
 volumes:
   mariadb_data:
