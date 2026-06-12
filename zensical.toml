@@ -31,8 +31,8 @@ nav = [
     ]},
     { "Pipelines CI/CD" = [
         { "Validation Git" = "Workflows/Git.md" },
-        { "CI Backend" = "Workflows/Backend.md" },
-        { "CI Frontend" = "Workflows/Frontend.md" },
+        { "CI Backend" = "Workflows/Spring.md" },
+        { "CI Frontend" = "Workflows/Angular.md" },
         { "Déploiement Doc" = "Workflows/Docs.md" }
     ]}
 ]
