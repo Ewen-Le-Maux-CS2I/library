@@ -29,12 +29,14 @@ services:
     container_name: library-backend
     restart: always
     ports:
-      - "8080:8080"
+      - "${DB_PORT}:3306"
     environment:
-      - SPRING_DATASOURCE_URL=jdbc:mariadb://database:3306/library_db?createDatabaseIfNotExist=true
-      - SPRING_DATASOURCE_USERNAME=library_user
-      - SPRING_DATASOURCE_PASSWORD=library_password
-      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+      MARIADB_HOST: database
+      MARIADB_PORT: 3306
+      MARIADB_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
+      MARIADB_DATABASE: ${DB_NAME}
+      MARIADB_USER: ${DB_USER}
+      MARIADB_PASSWORD: ${DB_PASSWORD}
     depends_on:
       database:
         condition: service_healthy
@@ -47,7 +49,7 @@ services:
     container_name: library-frontend
     restart: always
     ports:
-      - "80:80"  # Rend le front accessible sur http://localhost
+      - "${FRONTEND_PORT}:80"
     depends_on:
       - backend
 
