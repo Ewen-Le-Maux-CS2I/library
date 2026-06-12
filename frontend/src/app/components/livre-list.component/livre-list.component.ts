@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { LivreService } from '../../services/livre.service';
 import { Livre } from '../../models/livre.model';
@@ -10,13 +10,13 @@ import { Livre } from '../../models/livre.model';
   templateUrl: './livre-list.component.html',
 })
 export class LivreListComponent implements OnInit {
-  livres: Livre[] = [];
+  livres = signal<Livre[]>([]);
 
   constructor(private livreService: LivreService) {}
 
   ngOnInit(): void {
     this.livreService.getLivres().subscribe({
-      next: (data) => (this.livres = data),
+      next: (data) => this.livres.set(data),
       error: (err) => console.error('Erreur lors du chargement des livres', err),
     });
   }
