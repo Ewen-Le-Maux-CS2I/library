@@ -28,5 +28,11 @@ jobs:
           mvn spotless:apply
           mvn spotless:check
 
+      - name: Vulnerability Scan (OWASP Dependency-Check)
+        run: |
+          mvn org.owasp:dependency-check-maven:check \
+            -Dformat=HTML \
+            -DfailBuildOnCVSS=7
+
       - name: Build and Run Tests (TDD)
         run: mvn clean verify
