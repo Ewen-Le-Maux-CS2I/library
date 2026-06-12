@@ -7,7 +7,9 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "test:ci": "ng test --watch=false --browsers=chromium"
+    "test:ci": "ng test --watch=false --browsers=chromium",
+    "lint:apply": "prettier --write \"src/**/*.{ts,html,css,json}\"",
+    "lint:check": "prettier --check \"src/**/*.{ts,html,css,json}\""
   },
   "private": true,
   "packageManager": "npm@11.7.0",
@@ -29,7 +31,7 @@
     "@vitest/browser-playwright": "^4.1.8",
     "jsdom": "^28.0.0",
     "postcss": "^8.5.3",
-    "prettier": "^3.8.1",
+    "prettier": "^3.8.4",
     "tailwindcss": "^4.1.12",
     "typescript": "~5.9.2",
     "vitest": "^4.0.8"

@@ -29,6 +29,12 @@ jobs:
 
     - name: Audit et Correction des vulnérabilités
       run: npm audit fix 
+    
+    - name: Linter
+      run: |
+        npm run lint:apply
+        npm run lint:check
+
 
 
     - name: Vérification de la compilation 
