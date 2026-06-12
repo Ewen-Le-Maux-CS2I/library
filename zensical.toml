@@ -27,7 +27,7 @@ nav = [
     ]},
     { "Suites de Tests" = [
         { "Backend" = "Test/Backend.md" },
-        { "Frontend" = "Test/Frontend.md" }
+        { "Frontend" = "Test/Front.md" }
     ]},
     { "Pipelines CI/CD" = [
         { "Validation Git" = "Workflows/Git.md" },
