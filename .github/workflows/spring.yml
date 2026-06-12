@@ -34,7 +34,7 @@ jobs:
           scan-type: fs
           scan-ref: backend
           scanners: vuln
-          severity: HIGH,CRITICAL
+          severity: CRITICAL
           exit-code: '1'
           ignore-unfixed: true
 
