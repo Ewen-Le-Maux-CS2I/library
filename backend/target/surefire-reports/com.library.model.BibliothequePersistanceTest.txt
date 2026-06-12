@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: com.library.model.BibliothequePersistanceTest
 -------------------------------------------------------------------------------
-Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 5.713 s -- in com.library.model.BibliothequePersistanceTest
+Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 9.007 s -- in com.library.model.BibliothequePersistanceTest
