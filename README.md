@@ -18,8 +18,11 @@
 
 ```bash
 # Depuis la racine du projet
-docker compose up --build
+    make up
 ```
 
-L'API est disponible sur `http://localhost:8080`.  
+L'API est disponible sur `http://localhost:8080`.
+La doc de l'API sur `http://localhost:8080/swagger-ui/index.html`.
+Le Front sur `http://localhost:4200`. 
+La documentation du projet `https://ewen-le-maux-cs2i.github.io/library/`
 
